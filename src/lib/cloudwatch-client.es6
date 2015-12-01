@@ -10,10 +10,11 @@ import {find} from 'lodash'
 import CloudWatchEventFormatter from './cloudwatch-event-formatter'
 
 export default class CloudWatchClient {
-  constructor (logGroupName, logStreamName, options) {
+  constructor (logGroupName, logStreamName, options, formatter) {
     debug('constructor', {logGroupName, logStreamName, options})
     this._logGroupName = logGroupName
     this._logStreamName = logStreamName
+    this._formatter = formatter
     this._options = defaults(options, {
       awsConfig: null,
       maxSequenceTokenAge: -1
@@ -35,7 +36,7 @@ export default class CloudWatchClient {
     const params = {
       logGroupName: this._logGroupName,
       logStreamName: this._logStreamName,
-      logEvents: batch.map(CloudWatchEventFormatter.formatLogItem),
+      logEvents: batch.map(CloudWatchEventFormatter.formatLogItem(this._formatter)),
       sequenceToken
     }
     return this._client.putLogEventsAsync(params)

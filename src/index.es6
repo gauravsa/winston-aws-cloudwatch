@@ -6,9 +6,9 @@ import LogItem from './lib/log-item'
 import Relay from './lib/relay'
 
 class CloudWatchTransport extends Transport {
-  constructor ({logGroupName, logStreamName, awsConfig}) {
-    super()
-    const client = new CloudWatchClient(logGroupName, logStreamName, {awsConfig})
+  constructor ({logGroupName, logStreamName, awsConfig, options}) {
+    super(options)
+    const client = new CloudWatchClient(logGroupName, logStreamName, {awsConfig}, options.formatter)
     const relay = new Relay(client)
     relay.on('error', err => console.error('CloudWatch error: %s', err))
     this._queue = relay.start()
