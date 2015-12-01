@@ -40,7 +40,7 @@ var CloudWatchTransport = (function (_Transport) {
     _classCallCheck(this, CloudWatchTransport);
 
     _get(Object.getPrototypeOf(CloudWatchTransport.prototype), 'constructor', this).call(this, options);
-    var client = new _libCloudwatchClient2['default'](logGroupName, logStreamName, { awsConfig: awsConfig }, optionsformatter);
+    var client = new _libCloudwatchClient2['default'](logGroupName, logStreamName, { awsConfig: awsConfig }, options.formatter);
     var relay = new _libRelay2['default'](client);
     relay.on('error', function (err) {
       return console.error('CloudWatch error: %s', err);

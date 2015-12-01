@@ -30,7 +30,6 @@ var CloudWatchEventFormatter = (function () {
     key: '_logItemToCloudWatchMessage',
     value: function _logItemToCloudWatchMessage(item, formatter) {
       var meta = (0, _lodash.isEmpty)(item.meta) ? '' : ' ' + JSON.stringify(item.meta, null, 2);
-      console.log("formatter: " + item);
       var message = formatter === undefined ? '' + item.message : formatter(item);
       return '[' + item.level.toUpperCase() + ']' + " " + message + ('' + meta);
     }

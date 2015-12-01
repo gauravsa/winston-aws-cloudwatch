@@ -9,7 +9,7 @@ describe('CloudWatchEventFormatter', () => {
   describe('#formatItem()', () => {
     it('formats a log item', () => {
       const date = 123456789
-      const item = new LogItem(date, 'info', 'Hello, world', {foo: 'bar'}
+      const item = new LogItem(date, 'info', 'Hello, world', {foo: 'bar'})
       const event = CloudWatchEventFormatter.formatLogItem((options) => {
         return options.message
       })(item)
